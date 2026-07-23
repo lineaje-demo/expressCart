@@ -29,7 +29,7 @@
     "@adyen/api-library": "^2.1.7",
     "ajv": "^6.10.2",
     "ajv-errors": "^1.0.1",
-    "async": "^2.6.3",
+    "async": "2.6.4-lineaje-01",
     "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "1.20.6",
