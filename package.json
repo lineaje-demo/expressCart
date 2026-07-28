@@ -33,7 +33,7 @@
     "axios": "0.33.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "1.20.6",
-    "cheerio": "^0.22.0",
+    "cheerio": "0.22.0-lineaje-01",
     "colors": "^1.4.0",
     "connect-mongodb-session": "2.4.1-lineaje-01",
     "cookie-parser": "^1.4.4",
