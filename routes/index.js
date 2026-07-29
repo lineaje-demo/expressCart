@@ -10,7 +10,8 @@ const {
     clearSessionValue,
     getImages,
     addSitemapProducts,
-    getCountryList
+    getCountryList,
+    mongoSanitize
 } = require('../lib/common');
 const {
     getSort,
@@ -319,8 +320,9 @@ router.post('/checkout/adddiscountcode', async (req, res) => {
         return;
     }
 
-    // Check defined or null
-    if(!req.body.discountCode || req.body.discountCode === ''){
+    // Check defined or null. Reject any non-string value so that Mongo
+    // query operators cannot be injected via a JSON object/array.
+    if(!req.body.discountCode || typeof req.body.discountCode !== 'string' || req.body.discountCode === ''){
         res.status(400).json({
             message: 'Discount code is invalid or expired'
         });
@@ -328,7 +330,7 @@ router.post('/checkout/adddiscountcode', async (req, res) => {
     }
 
     // Validate discount code
-    const discount = await db.discounts.findOne({ code: req.body.discountCode });
+    const discount = await db.discounts.findOne({ code: mongoSanitize(req.body.discountCode) });
     if(!discount){
         res.status(400).json({
             message: 'Discount code is invalid or expired'
